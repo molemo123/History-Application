@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/history"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/age"
+        android:layout_width="352dp"
+        android:layout_height="233dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="238dp"
+        android:layout_marginEnd="480dp"
+        android:layout_marginBottom="379dp"
+        android:hint="Enter your age"
+        android:inputType="number"
+        android:padding="30dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnGen"
+        app:layout_constraintEnd_toStartOf="@+id/txtRes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HISTORY APP!"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <TextView
+        android:id="@+id/txtRes"
+        android:layout_width="271dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="150dp"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.321" />
+
+
+    <Button
+        android:id="@+id/exit"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="555dp"
+        android:layout_marginBottom="75dp"
+        android:background="#000000"
+        android:text="EXIT!"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/btnGen"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="100dp"
+        android:text="GENERATE!"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnClr"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnClr"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="75dp"
+        android:text="CLEAR!"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnGen"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="272dp"
+        android:layout_height="278dp"
+        app:layout_constraintBottom_toTopOf="@+id/exit"
+        app:layout_constraintEnd_toStartOf="@+id/txtRes"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toEndOf="@+id/age"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.644"
+        tools:srcCompat="@tools:sample/avatars" />
+
+        app:layout_constraintBottom_toTopOf="@+id/btnGen"
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+package com.example.historyapp
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var ageInt: EditText
+    private lateinit var txtRes: TextView
+    private lateinit var btnGen: Button
+    private lateinit var btnClr: Button
+    private lateinit var exit: Button
+    private lateinit var imageView2: ImageView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        ageInt = findViewById(R.id.age)
+        txtRes = findViewById(R.id.txtRes)
+        btnGen = findViewById(R.id.btnGen)
+        btnClr = findViewById(R.id.btnClr)
+        exit = findViewById(R.id.exit)
+        imageView2 = findViewById(R.id.imageView2)
+
+        btnGen.setOnClickListener {
+            handleBtnGen()
+        }
+
+        btnClr.setOnClickListener {
+            handleBtnClr()
+        }
+
+        exit.setOnClickListener {
+            handleExit()
+        }
+    }
+
+    private fun handleBtnGen() {
+        // The age entered by the user from the EditText
+        val age = ageInt.text.toString()
+        if (age.isEmpty()) {
+            txtRes.text = "PLEASE ENTER YOUR AGE"
+            return
+
+        } else {
+
+            when (ageInt.text.toString().trim().toInt()) {
+                20 -> txtRes.text =
+                    "You are 20 years old, which is the same age as Pop Smoke when he died."
+                20 -> R.drawable.smoke
+
+                27 -> txtRes.text =
+                    "You are 27 years old, which is the same age as Jim Morrison when he died."
+                27 -> R.drawable.jim
+
+                32 -> txtRes.text =
+                    "You are 32 years old, which is the same age as Bruce Lee when he died."
+                32 -> R.drawable.lee
+
+                36 -> txtRes.text =
+                    "You are 36 years old, which is the same age as Marilyn Monroe when she died."
+                36 -> R.drawable.monroe
+
+                39 -> txtRes.text =
+                    "You are 39 years old, which is the same age as Martin Luther King Jr when he died."
+                39 -> R.drawable.king
+
+                46 -> txtRes.text =
+                    "You are 46 years old, which is the same age as John F Kennedy when he died."
+                46 -> R.drawable.jfk
+
+                76 -> txtRes.text =
+                    "You are 76 years old, which is the same age as Albert Einstein when he died."
+                76 -> R.drawable.albert
+
+                95 -> txtRes.text =
+                    "You are 95 years old, which is the same age as Nelson Mandela when he died."
+                95 -> R.drawable.nelson1
+
+                87 -> txtRes.text =
+                    "You are 87 years old, which is the same age as Mother Teresa when she died."
+                87 -> R.drawable.mother
+
+                100 -> txtRes.text =
+                    "You are 100 years old, which is the same age as Bob Hope when he died."
+                100 -> R.drawable.bob
+
+                else -> txtRes.text = "Sorry, no match found!"
+
+            }
+
+        }
+    }
+
+    private fun handleBtnClr() {
+        // The age entered by the user from the TextView
+        ageInt.text.clear()
+        txtRes.text = ""
+    }
+
+    private fun handleExit() {
+        // The user will exit the application
+        finish()
+    }
+}
